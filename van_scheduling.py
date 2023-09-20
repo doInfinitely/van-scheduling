@@ -32,6 +32,8 @@ class Request:
         self.user = user
         self.action = action
         self.location = user.destination if action == "dropoff" else user.origin
+    def __str__(self):
+        return "User: {0}, Action: {1}, Location: {2}".format(self.user.ID, self.action, self.location)
 class Van:
     def __init__(self, G):
         self.G = G
@@ -117,6 +119,8 @@ if __name__ == '__main__':
                 van.schedule(x)
                 van.reschedule()
         fleet.move()
-
-    for i,x in enumerate(fleet.vans):
-        print(i, x.history)
+        
+        for i,x in enumerate(fleet.vans):
+            print(i, x.history)
+            print([str(y) for y in x.queue])
+            print()
